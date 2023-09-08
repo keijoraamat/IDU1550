@@ -1,4 +1,4 @@
-package ylessane1
+package ylessanne1
 
 import "fmt"
 
@@ -7,10 +7,10 @@ type Point struct {
 	y float32
 }
 
-func NewPoint(x, y float32) *Point{
+func NewPoint(x, y float32) *Point {
 	return &Point{x: x, y: y}
 }
 
-func (*Point) String() string{
-	return fmt.Sprintf("\n")
+func (p *Point) String() string {
+	return fmt.Sprintf("x: %f\ny: %f\n", p.x, p.y)
 }
