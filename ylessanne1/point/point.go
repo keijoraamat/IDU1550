@@ -1,4 +1,4 @@
-package ylessanne1
+package point
 
 import "fmt"
 
