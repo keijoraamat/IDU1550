@@ -7,7 +7,7 @@ import (
 	"github.com/keijoraamat/IDU1550/ylessanne1/point"
 )
 
-func TestPoint_X_Should_Return_Abscissa_Of_Point(t *testing.T){
+func TestPoint_X_Should_Return_Abscissa_Of_Point(t *testing.T) {
 	p := point.NewPoint(7.778, 5.0)
 	want := 7.778
 
@@ -16,7 +16,7 @@ func TestPoint_X_Should_Return_Abscissa_Of_Point(t *testing.T){
 	}
 }
 
-func TestPoint_Y_Should_Return_Ordinate_Of_Point(t *testing.T){
+func TestPoint_Y_Should_Return_Ordinate_Of_Point(t *testing.T) {
 	p := point.NewPoint(1.1, -89.076)
 	want := -89.076
 
@@ -57,12 +57,12 @@ func TestPoint_Angle_To_Horizontal_Axis_Should_Be_As_Expected(t *testing.T) {
 	}
 }
 
-func TestPoint_VectorTo_Should_Return_Point_Representing_Vector_To_Other_Point(t *testing.T){
+func TestPoint_VectorTo_Should_Return_Point_Representing_Vector_To_Other_Point(t *testing.T) {
 	p := point.NewPoint(1.0, 0.0)
 	other := point.NewPoint(2.0, 3.0)
 	want := point.NewPoint(1.0, 3.0)
 
-	if got := p.VectorTo(*other); got.X() != want.X() && got.Y() != want.Y(){
+	if got := p.VectorTo(*other); got.X() != want.X() && got.Y() != want.Y() {
 		t.Errorf("VectorTo() = %f, want %f", got, want)
 	}
 }
@@ -77,14 +77,27 @@ func TestPoint_Distance_Should_Return_Distance_Between_Points_When_Given_Two_Poi
 	}
 }
 
-func TestPoint_Translate_Should_Move_Point_By_Given_Step(t *testing.T){
+func TestPoint_Translate_Should_Move_Point_By_Given_Step(t *testing.T) {
 	p := point.NewPoint(1.0, -1.0)
 	wantX := 0.5
 	wantY := 0.0
 
-    p.Translate(-0.5, 1.0)
+	p.Translate(-0.5, 1.0)
 
-	if  (p.X() != wantX || p.Y() != wantY){
+	if p.X() != wantX || p.Y() != wantY {
 		t.Errorf("Translate() = {%f, %f}, want {%f, %f}", p.X(), p.Y(), wantX, wantY)
 	}
+}
+
+func TestPoint_Scale_Should_Scale_By_Given_Factor(t *testing.T) {
+	p := point.NewPoint(2.0, 2.0)
+	wantX := 1.0
+	wantY := 1.0
+	factor := 0.5
+
+	p.Scale(factor)
+	if p.X() != wantX || p.Y() != wantY {
+		t.Errorf("Scale() = {%f, %f}, want {%f, %f}", p.X(), p.Y(), wantX, wantY)
+	}
+
 }

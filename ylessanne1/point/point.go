@@ -52,9 +52,9 @@ func (p *Point) Translate(dx float64, dy float64) {
 	p.y += dy
 }
 
-func (p *Point) Scale(factor int32) {
-	p.x *= float64(factor)
-	p.y *= float64(factor)
+func (p *Point) Scale(factor float64) {
+	p.x *= factor
+	p.y *= factor
 }
 
 func (p *Point) CentreRotate(angle float64) {
