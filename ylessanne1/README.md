@@ -23,3 +23,9 @@ classDiagram
         +Rotate(p Point, angle float64)
     }
 ```
+
+## Testide käivitamine
+
+```bash
+go test -v ./... -cover
+```
