@@ -101,3 +101,39 @@ func TestPoint_Scale_Should_Scale_By_Given_Factor(t *testing.T) {
 	}
 
 }
+
+func TestPoint_CentreRotate_Should_Rotate_Around_Centre_Point_When_Given_Angle(t *testing.T) {
+	p := point.NewPoint(0.0, 1.0)
+	initialTheta := p.Theta()
+	angle := 2 * math.Pi
+
+	p.CentreRotate(angle)
+	wantX := p.Roh() * math.Cos(initialTheta+angle)
+	wantY := p.Roh() * math.Sin(initialTheta+angle)
+	if p.X() != wantX || p.Y() != wantY {
+		t.Errorf("CentreRotate(%f) = {%f, %f}, want {%f, %f}", angle, p.X(), p.Y(), wantX, wantY)
+	}
+
+}
+
+func TestPoint_Rotate_Should_Rotate_Around_Given_Point_By_Angle(t *testing.T) {
+	// Arrange
+	p := point.NewPoint(4.0, 0.0)
+	rotationP := point.NewPoint(0.0, 0.0)
+	angle := math.Pi
+	tolerance := 1e-6
+
+	// Act
+	p.Rotate(*rotationP, angle)
+
+	// Assert
+	initialVector := p.VectorTo(*rotationP)
+	newX := initialVector.X()*math.Cos(angle) - initialVector.Y()*math.Sin(angle)
+	newY := initialVector.X()*math.Sin(angle) + initialVector.Y()*math.Cos(angle)
+	expectedX := rotationP.X() + newX
+	expectedY := rotationP.Y() + newY
+
+	if math.Abs(p.X()-expectedX) > tolerance || math.Abs(p.Y()-expectedY) > tolerance {
+		t.Errorf("Rotate(%f) = {%f, %f}, want {%f, %f}", angle, p.X(), p.Y(), expectedX, expectedY)
+	}
+}
