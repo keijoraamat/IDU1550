@@ -1,3 +1,23 @@
+// Package point provides a simple representation of a two-dimensional point
+// and utility functions for manipulating points in a Cartesian coordinate
+// system.
+//
+// Points can be created with the NewPoint function, and various operations
+// like translation, scaling, rotation, and distance calculation are provided.
+// Additionally, this package includes methods for accessing the X and Y
+// coordinates, calculating the distance to the origin, and finding the angle
+// with respect to the horizontal axis.
+//
+// Example usage:
+//
+//	p := point.NewPoint(3.0, 4.0)
+//	p.Translate(1.0, 2.0)
+//	p.Scale(2.0)
+//	p.Rotate(point.NewPoint(0.0, 0.0), math.Pi/2)
+//
+//	fmt.Printf("X: %f, Y: %f\n", p.X(), p.Y())
+//	fmt.Printf("Distance to origin: %f\n", p.Roh())
+//	fmt.Printf("Angle with horizontal axis: %f\n", p.Theta())
 package point
 
 import (
