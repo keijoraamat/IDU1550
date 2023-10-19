@@ -124,18 +124,16 @@ func TestPoint_Rotate_Should_Rotate_Around_Given_Point_By_Angle(t *testing.T) {
 	p := point.NewPoint(4.0, 0.0)
 	rotationP := point.NewPoint(0.0, 0.0)
 	angle := math.Pi
+	oldVector := rotationP.VectorTo(*p)
 
 	// Act
 	p.Rotate(*rotationP, angle)
 
 	// Assert
-	initialVector := p.VectorTo(*rotationP)
-	newX := initialVector.X()*math.Cos(angle) - initialVector.Y()*math.Sin(angle)
-	newY := initialVector.X()*math.Sin(angle) + initialVector.Y()*math.Cos(angle)
-	expectedX := rotationP.X() + newX
-	expectedY := rotationP.Y() + newY
+	//old vectorTo(rotationP).theta + angle = new vectorTo(rotationP).theta
+	newVector := rotationP.VectorTo(*p)
 
-	if math.Abs(p.X()-expectedX) > tolerance || math.Abs(p.Y()-expectedY) > tolerance {
-		t.Errorf("Rotate(%f) = {%f, %f}, want {%f, %f}", angle, p.X(), p.Y(), expectedX, expectedY)
+	if oldVector.Theta()+angle != newVector.Theta() {
+		t.Errorf("Rotate(%f) = {%f, %f}, want {%f, %f}", angle, p.X(), p.Y(), oldVector.Theta(), newVector.Theta())
 	}
 }
