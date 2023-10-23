@@ -11,7 +11,7 @@ import (
 func main() {
 
 	cur := currency.NewCurrency("EUR", "Euro")
-	cur.SetRateTo(*cur, 1.0)
+	cur.SetRateTo(cur, 1.0)
 
 	sum := sum.NewSumOfMoney(100, cur)
 	fmt.Println(sum.ToString())
