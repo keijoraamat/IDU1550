@@ -19,11 +19,11 @@ type Currency struct {
 	Rates []RateInterface
 }
 
-func NewCurrency(code string, name string) Currency {
+func NewCurrency(code string, name string) *Currency {
 	c := Currency{}
 	c.SetCode(code)
 	c.SetName(name)
-	return c
+	return &c
 }
 
 func (c *Currency) AddRate(currency CurrencyInterface, rate RateInterface) {
@@ -70,7 +70,7 @@ func (c *Currency) SetName(name string) {
 	c.name = name
 }
 
-func (c *Currency) ConvertTo(amount float64, currency Currency) (newAmount float64, err error) {
+func (c *Currency) ConvertTo(amount float64, currency *Currency) (newAmount float64, err error) {
 
 	if c.Code() == currency.Code() && c.Name() == currency.Name() {
 		return 0, errors.New("Currency can't should not be the same")
