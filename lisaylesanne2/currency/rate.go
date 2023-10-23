@@ -1,26 +1,36 @@
 package currency
 
 type RateInterface interface {
+	Exchange() float64
+	To() CurrencyInterface
 	ChangeRate(from CurrencyInterface, to CurrencyInterface, newRate float64)
-	NewExchange(e float64)
+	SetExchange(e float64)
 }
 
 type Rate struct {
 	From     CurrencyInterface
-	To       CurrencyInterface
-	Exchange float64
+	to       CurrencyInterface
+	exchange float64
 }
 
-func NewRate(from CurrencyInterface, to CurrencyInterface) *Rate {
-	return &Rate{From: from, To: to}
+func NewRate(from *Currency, to CurrencyInterface) *Rate {
+	return &Rate{From: from, to: to}
+}
+
+func (r *Rate) To() CurrencyInterface {
+	return r.to
+}
+
+func (r *Rate) Exchange() float64 {
+	return r.exchange
+}
+
+func (r *Rate) SetExchange(e float64) {
+	r.exchange = e
 }
 
 func (r *Rate) ChangeRate(from CurrencyInterface, to CurrencyInterface, newRate float64) {
 	r.From = from
-	r.To = to
-	r.Exchange = newRate
-}
-
-func (r *Rate) NewExchange(e float64) {
-	r.Exchange = e
+	r.to = to
+	r.SetExchange(newRate)
 }

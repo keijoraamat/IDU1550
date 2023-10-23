@@ -9,22 +9,22 @@ import (
 
 type SumOfMoney struct {
 	amount   float64
-	currency *currency.Currency
+	currency currency.Currency
 }
 
-func NewSumOfMoney(amount float64, currency *currency.Currency) *SumOfMoney {
-	return &SumOfMoney{amount: amount, currency: currency}
+func NewSumOfMoney(amount float64, currency currency.Currency) SumOfMoney {
+	return SumOfMoney{amount: amount, currency: currency}
 }
 
 func (s *SumOfMoney) ToString() string {
-	return s.currency.Code + " " + fmt.Sprintf("%.2f", s.amount)
+	return s.currency.Code() + " " + fmt.Sprintf("%.2f", s.amount)
 }
 
 func (s *SumOfMoney) Amount() float64 {
 	return s.amount
 }
 
-func (s *SumOfMoney) Currency() *currency.Currency {
+func (s *SumOfMoney) Currency() currency.Currency {
 	return s.currency
 }
 
@@ -50,4 +50,15 @@ func (s *SumOfMoney) Decrease(amount float64) error {
 
 	s.amount -= amount
 	return nil
+}
+
+func (s *SumOfMoney) ConvertTo(currency currency.Currency) (newSumOfMoney SumOfMoney, err error) {
+
+	c := s.Currency()
+	sum, conversionErr := c.ConvertTo(s.Amount(), currency)
+	if conversionErr != nil {
+		return SumOfMoney{}, conversionErr
+	}
+
+	return NewSumOfMoney(sum, currency), nil
 }
