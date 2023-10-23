@@ -1,6 +1,7 @@
 package currency
 
 import (
+	"bytes"
 	"errors"
 	"fmt"
 )
@@ -85,4 +86,28 @@ func (c *Currency) ConvertTo(amount float64, currency *Currency) (newAmount floa
 	}
 
 	return 0, errors.New("No exchange rate found")
+}
+
+func (c *Currency) RatesTable() string {
+	var buf bytes.Buffer
+
+	// Start the HTML table
+	buf.WriteString("<table>\n")
+	buf.WriteString("<tr>\n\t<th>From</th>\n\t<th>To</th>\n\t<th>Exchange Rate</th>\n</tr>\n")
+
+	// Iterate through the rates and add rows to the table
+	for _, rate := range c.Rates {
+		buf.WriteString("<tr>")
+		from := rate.From()
+		buf.WriteString(fmt.Sprintf("\t<td>%s</td>\n", from.Code()))
+		to := rate.To()
+		buf.WriteString(fmt.Sprintf("\t<td>%s</td>\n", to.Code()))
+		buf.WriteString(fmt.Sprintf("\t<td>%f</td>\n", rate.Exchange()))
+		buf.WriteString("</tr>\n")
+	}
+
+	// End the HTML table
+	buf.WriteString("</table>")
+
+	return buf.String()
 }

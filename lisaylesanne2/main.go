@@ -37,4 +37,7 @@ func main() {
 		fmt.Println(dollaSum.ToString())
 	}
 	fmt.Println(dollaSum.ToString())
+
+	table := cur.RatesTable()
+	fmt.Println(table)
 }
