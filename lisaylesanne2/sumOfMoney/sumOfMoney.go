@@ -1,4 +1,4 @@
-package sumofmoney
+package sumOfMoney
 
 import (
 	"errors"
