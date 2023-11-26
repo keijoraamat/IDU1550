@@ -10,14 +10,14 @@ import (
 )
 
 type FyneDrawer struct {
-	app *app
-	w   *app.Window
+	myApp fyne.App
+	w     fyne.Window
 }
 
 func NewFyneDrawer() *FyneDrawer {
 	fd := FyneDrawer{}
-	fd.app = app.NewApp()
-	fd.w = fd.app.NewWindow("Drawer")
+	fd.myApp = app.New()
+	fd.w = fd.myApp.NewWindow("Drawer")
 	return &fd
 }
 
@@ -26,15 +26,13 @@ func (fd *FyneDrawer) DrawPoints(points []Point.Point) {
 	for _, point := range points {
 		pnt := canvas.NewCircle(color.RGBA{0, 0, 0, 255})
 		pnt.Resize(fyne.NewSize(2, 2))
-		pnt.Move(fyne.NewPos(point.X, point.Y))
+		pnt.Move(fyne.NewPos(float64(point.X), float64(point.Y)))
 		pnts = append(pnts, pnt)
 	}
 
 	content := container.NewWithoutLayout(points...)
 	scroll := container.NewVScroll(content)
-	fd.w.SetContent(container.NewBorder(nil, nil, nil, nil,
-		scroll,
-	))
+	fd.w.SetContent(scroll)
 	fd.w.Resize(fyne.NewSize(1000, 1000))
 	fd.w.ShowAndRun()
 }
