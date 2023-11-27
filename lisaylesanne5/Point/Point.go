@@ -1,5 +1,5 @@
 package point
 
 type Point struct {
-	X, Y int
+	X, Y float64
 }
