@@ -3,14 +3,14 @@ package main
 import (
 	sierpinskitriangle "github.com/keijoraamat/IDU1550/lisaylesanne5/SierpinskiTriangle"
 
-	"github.com/keijoraamat/IDU1550/lisaylesanne5/FyneDrawer"
+	fynedrawer "github.com/keijoraamat/IDU1550/lisaylesanne5/FyneDrawer"
 	Point "github.com/keijoraamat/IDU1550/lisaylesanne5/Point"
 )
 
 func main() {
 
 	centre := Point.Point{X: 0, Y: 0}
-	sideLength := 3
+	sideLength := 8
 
 	st := sierpinskitriangle.SierpinskiTriangle{}
 
@@ -20,7 +20,7 @@ func main() {
 		println(i, point.X, point.Y)
 	}
 
-	fd := FyneDrawer.NewFyneDrawer()
+	fd := fynedrawer.NewFyneDrawer()
 	fd.DrawPoints(points)
 
 }
