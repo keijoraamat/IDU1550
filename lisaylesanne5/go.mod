@@ -2,8 +2,6 @@ module github.com/keijoraamat/IDU1550/lisaylesanne5
 
 go 1.20
 
-require github.com/Pitrified/go-turtle v0.3.0
-
 require fyne.io/fyne/v2 v2.4.2
 
 require (
