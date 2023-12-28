@@ -9,7 +9,7 @@ import (
 // Service Layer
 type ItemService struct {
 	items      []models.Item
-	repository DAL.ItemRepository
+	Repo *DAL.ItemRepository
 }
 
 func (is *ItemService) GetAllItems() []models.Item {
@@ -21,6 +21,6 @@ func (is *ItemService) CreateItem(item *models.Item) uint {
 	// or here
 	// or here
 
-	var ID = is.repository.CreateItem(item)
+	var ID = is.Repo.CreateItem(item)
 	return ID
 }

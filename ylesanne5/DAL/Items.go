@@ -20,11 +20,12 @@ func (ir *ItemRepository) GetAllItems() []models.Item {
 }
 
 func (ir *ItemRepository) CreateItem(item *models.Item) uint  {
-	// This is where you would save data to a database
+
 	result := ir.DB.Create(&item)
 	if result.Error != nil {
 		log.Println("Could not create item: ", &item)
 	}
 	return item.ID
+	
 }
 

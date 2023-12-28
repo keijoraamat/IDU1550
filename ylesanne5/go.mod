@@ -1,6 +1,6 @@
 module github.com/keijoraamat/IDU1550/ylesanne5
 
-go 1.21.5
+go 1.21
 
 require (
 	gorm.io/driver/sqlite v1.5.4

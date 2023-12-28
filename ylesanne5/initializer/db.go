@@ -7,19 +7,16 @@ import (
 	"gorm.io/gorm"
 )
 
-var DB *gorm.DB
-
-func ConnectToDB() {
+func ConnectToDB() (DB *gorm.DB) {
 	var err error
 
 	DB, err = gorm.Open(sqlite.Open("3layers.db"))
 	if err != nil {
 		panic("DB connection failed")
 	}
-}
 
-func SyncDB() {
 	DB.AutoMigrate(
 		&models.Item{},
 	)
+	return
 }
