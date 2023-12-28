@@ -19,7 +19,7 @@ func init() {
 }
 
 func main() {
-	http.HandleFunc("/items", PL.GetAllItemsHandler)
+	http.HandleFunc("/items", PL.GetAllItemsHandler(service))
 	http.HandleFunc("/item", PL.CreateItemHandler(service))
 
 	log.Fatal(http.ListenAndServe(":8080", nil))

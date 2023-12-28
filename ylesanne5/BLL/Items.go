@@ -8,12 +8,11 @@ import (
 
 // Service Layer
 type ItemService struct {
-	items      []models.Item
 	Repo *DAL.ItemRepository
 }
 
 func (is *ItemService) GetAllItems() []models.Item {
-	return is.items
+	return is.Repo.GetAllItems()
 }
 
 func (is *ItemService) CreateItem(item *models.Item) uint {

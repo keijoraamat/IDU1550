@@ -11,12 +11,17 @@ import (
 
 type ItemRepository struct {
 	DB	*gorm.DB
-	items []models.Item
 }
 
 func (ir *ItemRepository) GetAllItems() []models.Item {
-	// This is where you would retrieve data from a database
-	return ir.items
+
+	var items []models.Item
+	result := ir.DB.Find(&items)
+	if result.Error != nil {
+		log.Println("error getting all items.")
+	}
+	return items
+	
 }
 
 func (ir *ItemRepository) CreateItem(item *models.Item) uint  {
@@ -26,6 +31,6 @@ func (ir *ItemRepository) CreateItem(item *models.Item) uint  {
 		log.Println("Could not create item: ", &item)
 	}
 	return item.ID
-	
+
 }
 
