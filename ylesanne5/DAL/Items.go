@@ -10,7 +10,7 @@ import (
 // Data Access Layer
 
 type ItemRepository struct {
-	DB	*gorm.DB
+	DB *gorm.DB
 }
 
 func (ir *ItemRepository) GetAllItems() []models.Item {
@@ -21,16 +21,16 @@ func (ir *ItemRepository) GetAllItems() []models.Item {
 		log.Println("error getting all items.")
 	}
 	return items
-	
+
 }
 
-func (ir *ItemRepository) CreateItem(item *models.Item) uint  {
+func (ir *ItemRepository) CreateItem(item *models.Item) uint {
 
 	result := ir.DB.Create(&item)
 	if result.Error != nil {
+		log.Println("error creating item: ", result.Error)
 		log.Println("Could not create item: ", &item)
 	}
 	return item.ID
 
 }
-

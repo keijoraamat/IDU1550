@@ -5,8 +5,16 @@
 - sqlite, kasutamiseks
 - Go kompilaator, ehitamiseks
 
-## Kuidas käivitada
+## Kuidas
+
+### Käivitada ilma ehitamata
 
 ```shell
 go run .
+```
+
+### Käivitada kõiki teste
+
+```shell
+go test -v ./... -cover
 ```
