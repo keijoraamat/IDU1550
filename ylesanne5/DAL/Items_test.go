@@ -1,6 +1,7 @@
 package DAL_test
 
 import (
+	"strconv"
 	"testing"
 
 	"github.com/DATA-DOG/go-sqlmock"
@@ -84,6 +85,33 @@ func TestGetAllItems(t *testing.T) {
 		if item.Price != expectedItems[i].Price || item.Name != expectedItems[i].Name {
 			t.Errorf("expected item %v, got %v", expectedItems[i], item)
 		}
+	}
+
+	teardownMockDB(db)
+}
+
+func TestDeleteItem(t *testing.T) {
+	db, _ := setupMockDB()
+	repo := DAL.ItemRepository{DB: db}
+
+	item := models.Item{Name: "Test Item", Price: 10}
+
+	// Add item to DB
+	// Get the ID of the item
+	id := repo.CreateItem(&item)
+	if id == 0 {
+		t.Errorf("CreateItem was incorrect, got: %d, want: %s.", id, "greater than 0")
+	}
+
+	// Remove the item from the DB
+	s := strconv.FormatUint(uint64(id), 10)
+	repo.DeleteItem(s)
+
+	items := repo.GetAllItems()
+
+	// Check that the function returns the correct data
+	if len(items) != 0 {
+		t.Errorf("expected %d items, got %d", 0, len(items))
 	}
 
 	teardownMockDB(db)

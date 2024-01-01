@@ -34,3 +34,10 @@ func (ir *ItemRepository) CreateItem(item *models.Item) uint {
 	return item.ID
 
 }
+
+func (ir *ItemRepository) DeleteItem(id string) {
+
+	var item models.Item
+	ir.DB.Where("id = ?", id).Delete(&item)
+
+}

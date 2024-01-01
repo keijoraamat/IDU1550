@@ -21,6 +21,7 @@ func init() {
 func main() {
 	http.HandleFunc("/items", PL.GetAllItemsHandler(service))
 	http.HandleFunc("/item", PL.CreateItemHandler(service))
+	http.HandleFunc("/item/delete/{id}", PL.DeleteItemHandler(service))
 
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

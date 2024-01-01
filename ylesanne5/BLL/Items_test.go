@@ -23,6 +23,10 @@ func (m *MockItemRepository) CreateItem(item *models.Item) uint {
 	return m.MockCreateItem(item)
 }
 
+func (m *MockItemRepository) DeleteItem(id string) {
+	m.ID = 1
+}
+
 func TestGetAllItems(t *testing.T) {
 	mockRepo := new(MockItemRepository)
 	mockRepo.MockGetAllItems = func() []models.Item {
@@ -49,5 +53,20 @@ func TestCreateItem(t *testing.T) {
 
 	if id != 1 {
 		t.Errorf("CreateItem was incorrect, got: %d, want: %d.", id, 1)
+	}
+}
+
+func TestDeleteItem(t *testing.T) {
+	mockRepo := new(MockItemRepository)
+	mockRepo.MockCreateItem = func(item *models.Item) uint {
+		return 1
+	}
+
+	service := BLL.ItemService{Repo: mockRepo}
+
+	service.DeleteItem("1")
+
+	if mockRepo.ID != 1 {
+		t.Errorf("DeleteItem was incorrect, got: %d, want: %d.", mockRepo.ID, 1)
 	}
 }

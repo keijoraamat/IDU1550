@@ -23,3 +23,7 @@ func (is *ItemService) CreateItem(item *models.Item) uint {
 	var ID = is.Repo.CreateItem(item)
 	return ID
 }
+
+func (is *ItemService) DeleteItem(id string) {
+	is.Repo.DeleteItem(id)
+}
