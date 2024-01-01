@@ -1,14 +1,14 @@
 package BLL
 
 import (
-	models "github.com/keijoraamat/IDU1550/ylesanne5/models"
+	DAL "github.com/keijoraamat/IDU1550/ylesanne5/DAL"
 
-	"github.com/keijoraamat/IDU1550/ylesanne5/DAL"
+	models "github.com/keijoraamat/IDU1550/ylesanne5/models"
 )
 
 // Service Layer
 type ItemService struct {
-	Repo *DAL.ItemRepository
+	Repo DAL.ItemRepositoryInterface
 }
 
 func (is *ItemService) GetAllItems() []models.Item {

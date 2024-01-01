@@ -10,7 +10,7 @@ import (
 	"github.com/keijoraamat/IDU1550/ylesanne5/initializer"
 )
 
-var service PL.ItemService
+var service PL.ItemServiceInterface
 
 func init() {
 	db := initializer.ConnectToDB()
