@@ -19,9 +19,11 @@ func init() {
 }
 
 func main() {
-	http.HandleFunc("/items", PL.GetAllItemsHandler(service))
-	http.HandleFunc("/item", PL.CreateItemHandler(service))
-	http.HandleFunc("/item/delete/{id}", PL.DeleteItemHandler(service))
+	mux := http.NewServeMux()
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	mux.HandleFunc("/items", PL.GetAllItemsHandler(service))
+	mux.HandleFunc("/item", PL.CreateItemHandler(service))
+	mux.HandleFunc("/item/delete/", PL.DeleteItemHandler(service))
+
+	log.Fatal(http.ListenAndServe(":8080", mux))
 }
